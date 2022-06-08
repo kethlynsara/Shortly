@@ -22,7 +22,7 @@ export async function validateSignUpUser(req, res, next) {
 export function validateSignUpData(req, res, next) {
     const { body } = req;
 
-    const { error } = schemaSignUp.validate(body, {abortEarly: false});
+    const { error } = signUpSchema.validate(body, {abortEarly: false});
    
     if (error) {
         return res.status(422).send(error.details.map(detail => detail.message));
