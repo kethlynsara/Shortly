@@ -16,3 +16,19 @@ export async function signUp(req, res) {
         res.sendStatus(500);
     }
 }
+
+export async function signIn(req, res) {
+    const { user } = res.locals;
+
+    try {
+        await db.query(`INSERT INTO sessions (token, "userId")
+        VALUES ($1, $2)`, [user.password, user.id]);
+
+        res.sendStatus(200);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+
+    res.send({token: user.password});
+}
