@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { deleteUrl, getLink, getShortUrl, shortLink } from '../controllers/linksController.js';
-import { validateShortUrl, validateToken, validateUrl, validateUrlId, validateUserUrl } from '../middlewares/linksMiddleware.js';
+import { validateShortUrl, validateUrl, validateUrlId, validateUserUrl } from '../middlewares/linksMiddleware.js';
+import { validateToken } from '../middlewares/tokenValidation.js';
 
 const linksRouter = Router();
 
