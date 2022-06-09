@@ -45,3 +45,16 @@ export async function shortLink(req, res) {
         res.sendStatus(500);
     }
 }
+
+export async function deleteUrl(req, res) {
+    const { url } = res.locals;
+    const { id } = url;
+    
+    try {
+        await db.query('DELETE FROM links WHERE id = $1', [id]);
+        res.sendStatus(204);
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+}

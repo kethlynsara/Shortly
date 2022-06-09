@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import db from '../app/db.js';
 import { linkSchema } from '../schemas/linksSchema.js';
 
@@ -68,6 +69,26 @@ export async function validateUrl(req, res, next) {
     if (error) {
         return res.status(422).send(error.details.map(detail => detail.message));
     }    
+
+    next();
+}
+
+export async function validateUserUrl(req, res, next) {
+    const { url } = res.locals;
+    const { token } = res.locals;
+    const jwtKey = process.env.SECRET_KEY;
+
+    try {
+        const { userId } = jwt.verify(token, jwtKey);
+
+        if (userId !== url.userId) {
+            return res.sendStatus(401);
+        }
+
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
 
     next();
 }
