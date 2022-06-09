@@ -13,6 +13,20 @@ export async function getLink(req, res) {
     });
 }
 
+export async function getShortUrl(req, res) {
+    const { linkInfo } = res.locals;
+    const { id, views, url} = linkInfo;
+    const addView = views + 1;
+
+    try {
+        await db.query(`UPDATE links SET views = $1 WHERE id = $2`, [addView, id]);
+        res.redirect(200, `${url}`);
+    } catch (e) {
+        console.log(e)
+        res.sendStatus(500);
+    }
+}
+
 export async function shortLink(req, res) {
     const { token } = res.locals;
     const { url } = req.body;

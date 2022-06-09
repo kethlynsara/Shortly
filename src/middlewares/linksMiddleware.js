@@ -20,6 +20,26 @@ export async function validateUrlId(req, res, next) {
     next();
 }
 
+export async function validateShortUrl(req, res, next) {
+    const { shortUrl } = req.params;
+
+    try {
+        const { rows } = await db.query('SELECT * FROM links WHERE "shortUrl" = $1', [shortUrl]);
+        
+        if (!rows[0] || !shortUrl) {
+            return res.status(404).send('URL não encontrado!');
+        }
+
+        res.locals.linkInfo = rows[0];
+
+    } catch (e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+
+    next();
+}
+
 export async function validateToken(req, res, next) {
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer", "").trim();
@@ -32,7 +52,6 @@ export async function validateToken(req, res, next) {
         }
 
         res.locals.token = token;
-
     } catch (e) {
         console.log(e);
         res.sendStatus(500);
