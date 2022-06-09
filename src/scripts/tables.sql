@@ -16,7 +16,7 @@ CREATE TABLE sessions (
 
 CREATE TABLE links (
     id SERIAL NOT NULL PRIMARY KEY,
-    url TEXT UNIQUE NOT NULL,
+    url TEXT NOT NULL,
     "shortUrl" TEXT UNIQUE NOT NULL,
     views INTEGER NOT NULL,
     "userId" INTEGER REFERENCES "users"("id"),
