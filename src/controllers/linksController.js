@@ -4,6 +4,15 @@ import dotenv from 'dotenv';
 import db from '../app/db.js';
 dotenv.config();
 
+export async function getLink(req, res) {
+    const { url } = res.locals;
+    res.send({
+        id: url.id,
+        shortUrl: url.shortUrl,
+        url: url.url
+    });
+}
+
 export async function shortLink(req, res) {
     const { token } = res.locals;
     const { url } = req.body;
