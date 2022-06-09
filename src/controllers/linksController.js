@@ -20,7 +20,7 @@ export async function getShortUrl(req, res) {
 
     try {
         await db.query(`UPDATE links SET views = $1 WHERE id = $2`, [addView, id]);
-        res.redirect(200, `${url}`);
+        return res.redirect(url);
     } catch (e) {
         console.log(e)
         res.sendStatus(500);
