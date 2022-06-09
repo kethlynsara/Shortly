@@ -24,14 +24,19 @@ export async function signIn(req, res) {
     const { user } = res.locals;
 
     try {
-        const data = { userId: user.id };
-        const secretKey = process.env.SECRET_KEY;
-        const token = jwt.sign(data, secretKey);
-        
-        await db.query(`INSERT INTO sessions (token, "userId")
-        VALUES ($1, $2)`, [token, user.id]);
-        
-        res.send({token});
+        const { rows } = await db.query(`SELECT * FROM sessions WHERE "userId" = $1`, [user.id]);
+        if (rows[0]) {
+            res.send({token: rows[0].token});
+        } else {
+            const data = { userId: user.id };
+            const jwtKey = process.env.SECRET_KEY;
+            const token = jwt.sign(data, jwtKey);
+            
+            await db.query(`INSERT INTO sessions (token, "userId")
+            VALUES ($1, $2)`, [token, user.id]);
+            
+            res.send({token});
+        }
     } catch (e) {
         console.log(e);
         res.sendStatus(500);
