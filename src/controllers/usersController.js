@@ -1,4 +1,3 @@
-import db from '../app/db.js';
 import { totalViewsRepository, userShortLinksRepository } from '../repositories/usersRepository.js';
 
 export async function getUserUrls(req, res) {

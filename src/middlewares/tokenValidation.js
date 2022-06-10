@@ -1,4 +1,3 @@
-import db from '../app/db.js';
 import { selectSessionRepository } from '../repositories/authRepository.js';
 
 export async function validateToken(req, res, next) {

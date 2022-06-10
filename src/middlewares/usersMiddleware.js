@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import db from '../app/db.js';
 import { selectUserRepository } from '../repositories/authRepository.js';
 
 export async function validateUserId(req, res, next) {

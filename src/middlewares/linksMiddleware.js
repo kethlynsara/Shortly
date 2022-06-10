@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import db from '../app/db.js';
 import { selectLinkInfoRepository } from '../repositories/linksRepository.js';
 import { linkSchema } from '../schemas/linksSchema.js';
 

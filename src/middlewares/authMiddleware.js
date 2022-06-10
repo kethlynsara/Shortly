@@ -1,5 +1,4 @@
 import bcrypt from 'bcrypt';
-import db from '../app/db.js';
 import { signUpSchema, signInSchema } from '../schemas/authSchema.js';
 import { selectUserRepository } from '../repositories/authRepository.js';
 

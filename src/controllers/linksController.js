@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import db from '../app/db.js';
 import { deleteLinkRepository, insertLinkRepository, updateViewsRepository } from '../repositories/linksRepository.js';
 dotenv.config();
 

@@ -24,3 +24,12 @@ async function getSession(columnName, info) {
 export const selectSessionRepository = {
     getSession
 }
+
+async function postSession(token, userId) {
+    return db.query(`INSERT INTO sessions (token, "userId")
+                     VALUES ($1, $2)`, [token, userId]);
+}
+
+export const insertSessionRepository = {
+    postSession
+}

@@ -1,4 +1,3 @@
-import db from '../app/db.js';
 import { rankingRepository } from '../repositories/rankingRepository.js';
 
 export async function getRanking(req, res) {
