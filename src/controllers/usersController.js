@@ -1,13 +1,14 @@
 import db from '../app/db.js';
+import { totalViewsRepository, userShortLinksRepository } from '../repositories/usersRepository.js';
 
 export async function getUserUrls(req, res) {
     const { id, name } = res.locals.user;
 
     try {
-        const { rows } = await db.query('SELECT SUM(views) as "visitCount" FROM links WHERE "userId" = $1', [id]);
+        const { rows } = await totalViewsRepository.getTotalViews(id)
         const visitCount = rows[0].visitCount;
 
-        const userLinks = await db.query('SELECT id, "shortUrl", url, views as "visitCount" FROM links WHERE "userId" = $1', [id]);
+        const userLinks = await userShortLinksRepository.getUserShortLinks(id);
         const shortenedUrls = userLinks.rows;
         
         const body = {
