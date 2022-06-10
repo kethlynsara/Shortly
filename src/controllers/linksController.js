@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import db from '../app/db.js';
+import { deleteLinkRepository, insertLinkRepository, updateViewsRepository } from '../repositories/linksRepository.js';
 dotenv.config();
 
 export async function getLink(req, res) {
@@ -19,7 +20,7 @@ export async function getShortUrl(req, res) {
     const addView = views + 1;
 
     try {
-        await db.query(`UPDATE links SET views = $1 WHERE id = $2`, [addView, id]);
+        await updateViewsRepository.updateViews(addView, id);
         return res.redirect(url);
     } catch (e) {
         console.log(e)
@@ -36,8 +37,7 @@ export async function shortLink(req, res) {
     try {
         const { userId } = jwt.verify(token, jwtKey);
 
-        await db.query(`INSERT INTO links (url, "shortUrl", views, "userId")
-                        VALUES ($1, $2, $3, $4)`, [url, shortUrl, 0, userId]);
+        await insertLinkRepository.postShortLink(url, shortUrl, userId);
 
         res.status(201).send({ shortUrl });
     } catch (error) {
@@ -51,7 +51,7 @@ export async function deleteUrl(req, res) {
     const { id } = url;
     
     try {
-        await db.query('DELETE FROM links WHERE id = $1', [id]);
+        await deleteLinkRepository.deleteLink(id);
         res.sendStatus(204);
     } catch (e) {
         console.log(e);

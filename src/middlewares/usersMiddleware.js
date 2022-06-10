@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import db from '../app/db.js';
+import { selectUserRepository } from '../repositories/authRepository.js';
 
 export async function validateUserId(req, res, next) {
     const { id } = req.params;
@@ -12,7 +13,7 @@ export async function validateUserId(req, res, next) {
     }
 
     try {
-        const { rows } = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
+        const { rows } = await selectUserRepository.getUser('id', userId);
         
         if (!rows[0]) {
             return res.status(404).send('Usuário não encontrado!');

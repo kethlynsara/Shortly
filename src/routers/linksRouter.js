@@ -5,8 +5,8 @@ import { validateToken } from '../middlewares/tokenValidation.js';
 
 const linksRouter = Router();
 
-linksRouter.get('/:id', validateUrlId, getLink);
 linksRouter.get('/open/:shortUrl', validateShortUrl, getShortUrl);
+linksRouter.get('/:id', validateUrlId, getLink);
 linksRouter.post('/shorten', validateToken, validateUrl, shortLink);
 linksRouter.delete('/:id', validateToken, validateUrlId, validateUserUrl, deleteUrl);
 
