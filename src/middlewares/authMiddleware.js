@@ -49,7 +49,7 @@ export async function validateSignInUser(req, res, next) {
     const { email, password } = req.body;
 
     try {   
-        const { rows } = await selectUserRepository.getUser(email);
+        const { rows } = await selectUserRepository.getUser('email', email);
 
         if (!rows[0] || !bcrypt.compareSync(password, rows[0].password)) {
             return res.status(401).send('Usuário não encontrado!');
