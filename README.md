@@ -8,17 +8,17 @@
 
 
 ## Features
-- Sign up
-- Sign in
-- Create a short link
-- Delete short URL
-- Ranking of URLs
+- [x] Sign up
+- [x] Sign in
+- [x] Create a short link
+- [x] Delete short URL
+- [x] Ranking of URLs
 
 ## Technologies
 
 <div align="center">
 	<img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" >
-	<img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" >
+   	<img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white" >
 	<img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" >
 	<img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" >
 	<img src="https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white" >
