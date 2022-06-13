@@ -4,7 +4,7 @@
 
 ## Features
 - Sign up
-- Sign In
+- Sign in
 - Create a short link
 - Delete short URL
 - Ranking of URLs
