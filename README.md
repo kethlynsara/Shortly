@@ -1,6 +1,11 @@
-# Shortly
+<div align="center">
+	<img src="https://user-images.githubusercontent.com/98347928/173277544-7d2b3cd1-2675-45fd-b2d2-af6b1f072523.png">
+</div>
+
+## About
 - Backend Development Project
 - Transform long links into short URLs
+
 
 ## Features
 - Sign up
