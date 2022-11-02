@@ -8,7 +8,9 @@ async function getUserShortLinks(id) {
     return db.query('SELECT id, "shortUrl", url, views as "visitCount" FROM links WHERE "userId" = $1', [id]);
 }
 
-export const usersRepository = {
+const usersRepository = {
     getTotalViews,
     getUserShortLinks
 }
+
+export default usersRepository;

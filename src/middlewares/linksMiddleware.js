@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import { linksRepository } from '../repositories/linksRepository.js';
 import { linkSchema } from '../schemas/linksSchema.js';
+dotenv.config();
 
 export async function validateUrlId(req, res, next) {
     const { id } = req.params;

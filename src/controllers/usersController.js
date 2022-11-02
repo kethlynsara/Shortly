@@ -1,25 +1,12 @@
-import { usersRepository } from '../repositories/usersRepository.js';
+import { usersService } from '../services/usersService.js';
 
 export async function getUserUrls(req, res) {
     const { id, name } = res.locals.user;
+    const links = await usersService.getUserUrls(id, name);
 
-    try {
-        const { rows } = await usersRepository.getTotalViews(id)
-        const visitCount = rows[0].visitCount;
-
-        const userLinks = await usersRepository.getUserShortLinks(id);
-        const shortenedUrls = userLinks.rows;
-        
-        const body = {
-            id,
-            name,
-            visitCount,
-            shortenedUrls
-        }
-
-        res.send(body);
-    } catch (e) {
-        console.log(e);
-        res.sendStatus(500);
+    if (links) {
+        return res.send(links);
+    } else {
+        return res.sendStatus(500);
     }
 }

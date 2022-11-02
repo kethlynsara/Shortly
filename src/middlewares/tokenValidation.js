@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 import { authRepository } from '../repositories/authRepository.js';
 
 export async function validateToken(req, res, next) {
@@ -11,7 +12,10 @@ export async function validateToken(req, res, next) {
             return res.status(401).send("Token inválido!");
         }
 
-        res.locals.token = token;
+        const jwtKey = process.env.SECRET_KEY;
+        const { userId } = jwt.verify(token, jwtKey);
+
+        res.locals.userId = userId;
     } catch (e) {
         console.log(e);
         res.sendStatus(500);
