@@ -1,13 +1,13 @@
-import { totalViewsRepository, userShortLinksRepository } from '../repositories/usersRepository.js';
+import { usersRepository } from '../repositories/usersRepository.js';
 
 export async function getUserUrls(req, res) {
     const { id, name } = res.locals.user;
 
     try {
-        const { rows } = await totalViewsRepository.getTotalViews(id)
+        const { rows } = await usersRepository.getTotalViews(id)
         const visitCount = rows[0].visitCount;
 
-        const userLinks = await userShortLinksRepository.getUserShortLinks(id);
+        const userLinks = await usersRepository.getUserShortLinks(id);
         const shortenedUrls = userLinks.rows;
         
         const body = {

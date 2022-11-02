@@ -1,11 +1,11 @@
-import { selectSessionRepository } from '../repositories/authRepository.js';
+import { authRepository } from '../repositories/authRepository.js';
 
 export async function validateToken(req, res, next) {
     const { authorization } = req.headers;
     const token = authorization?.replace("Bearer", "").trim();
     
     try {
-        const { rows } = await selectSessionRepository.getSession('token', token);
+        const { rows } = await authRepository.getSession('token', token);
 
         if (!token || rows.length === 0) {
             return res.status(401).send("Token inválido!");

@@ -1,12 +1,12 @@
 import bcrypt from 'bcrypt';
 import { signUpSchema, signInSchema } from '../schemas/authSchema.js';
-import { selectUserRepository } from '../repositories/authRepository.js';
+import { authRepository } from '../repositories/authRepository.js';
 
 export async function validateSignUpUser(req, res, next) {
     const { email } = req.body;
 
     try {   
-        const { rows } = await selectUserRepository.getUser('email' , email);
+        const { rows } = await authRepository.getUser('email' , email);
         
         if (rows[0]) {
             return res.status(422).send('Usuário já cadastrado!');
@@ -48,7 +48,7 @@ export async function validateSignInUser(req, res, next) {
     const { email, password } = req.body;
 
     try {   
-        const { rows } = await selectUserRepository.getUser('email', email);
+        const { rows } = await authRepository.getUser('email', email);
 
         if (!rows[0] || !bcrypt.compareSync(password, rows[0].password)) {
             return res.status(401).send('Usuário não encontrado!');

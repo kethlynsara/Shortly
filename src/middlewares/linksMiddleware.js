@@ -1,12 +1,12 @@
 import jwt from 'jsonwebtoken';
-import { selectLinkInfoRepository } from '../repositories/linksRepository.js';
+import { linksRepository } from '../repositories/linksRepository.js';
 import { linkSchema } from '../schemas/linksSchema.js';
 
 export async function validateUrlId(req, res, next) {
     const { id } = req.params;
 
     try{
-        const { rows } = await selectLinkInfoRepository.getInfo('id', id);
+        const { rows } = await linksRepository.getInfo('id', id);
 
         if (!rows[0]) {
             return res.status(404).send('URL não encontrado!');
@@ -25,7 +25,7 @@ export async function validateShortUrl(req, res, next) {
     const { shortUrl } = req.params;
 
     try {
-        const { rows } = await selectLinkInfoRepository.getInfo('shortUrl', shortUrl)
+        const { rows } = await linksRepository.getInfo('shortUrl', shortUrl)
         
         if (!rows[0] || !shortUrl || shortUrl == '') {
             return res.status(404).send('URL não encontrado!');

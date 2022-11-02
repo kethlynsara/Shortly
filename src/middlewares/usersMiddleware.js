@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { selectUserRepository } from '../repositories/authRepository.js';
+import { authRepository } from '../repositories/authRepository.js';
 
 export async function validateUserId(req, res, next) {
     const { id } = req.params;
@@ -12,7 +12,7 @@ export async function validateUserId(req, res, next) {
     }
 
     try {
-        const { rows } = await selectUserRepository.getUser('id', userId);
+        const { rows } = await authRepository.getUser('id', userId);
         
         if (!rows[0]) {
             return res.status(404).send('Usuário não encontrado!');
